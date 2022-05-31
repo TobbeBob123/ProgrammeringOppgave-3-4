@@ -1,0 +1,180 @@
+#+title: Oppgaver i programmering
+#+AUTHOR: Tobias Os Finsbøl
+#+PROPERTY: header-args :tangle Oppgaver_i_programmering.py
+
+* Oppgave 3 A B C
+** Oppgave A
+Her lager jeg en funksjon hvor programmet tar inn argumenter av hvert slag og printer ut summen.
+#+begin_src python 
+def antallMynter(tyvekroner, femkroner, krone):
+    return tyvekroner + femkroner + krone
+print(antallMynter(4, 5, 6))
+#+end_src
+
+** Oppgave B
+Her tar programmet inn alder på bruker og ser om bruker er over 18 år og om den andre er under 18 år og printer True hvis brukerene er over 18 år og den andre er under 18.
+#+begin_src python 
+def reisende():
+    alder1 = (int(input("Skriv alder: ")))
+    alder2 = (int(input("Skriv alder: ")))
+    if alder1 > 18 and alder2 < 18:
+        return True
+    if alder1 < 18 and alder2 < 18:
+        return None
+    if alder1 > 18 and alder2 > 18:
+        return None
+print(reisende())
+#+end_src
+
+** Oppgave C
+Feilen i utgangspunktet var at koden inneholdt return True og False. Problemmet er da at koden vil uansett returnere True og False uansett
+#+begin_src python 
+def sjekkPositiv(tallene):
+    for tall in tallene:
+        if (tall < 0):
+            return True
+
+print(sjekkPositiv([1,2,-3]))
+#+end_src
+
+** Oppgave D
+Her vil programmet se om alderene er positive, hvis de er vil den returnere True, hvis ikke vil den returnere False
+#+begin_src python
+def Bill():
+    for BillettKjøp in [1]:
+        if BillettKjøp >= 0:
+            return True
+        elif BillettKjøp <= 0:
+            return False
+print(Bill())
+#+end_src
+
+** Oppgave E
+Her tar programmet inn et nummer som har en pris på seg, hvis en under 18 reiser alene er det 0, mens reiser den med en voksen er prisen 25. Hvis en voksen uten barn er prisen 50 og reiser en over 67 år er prisen 25.
+#+begin_src python
+Billett = int(input("Tast inn din alder: "))
+def b():
+    if Billett <= 18:
+        spørsmål = input("Reiser barnet alene? [J/n]: ")
+        if spørsmål == "N" or "n":
+            return 0
+        if spørsmål == "j" or "J":
+            return 25
+    if Billett > 18 and Billett < 67:
+        return 50
+    elif Billett >= 67:
+        return 25
+print(b())
+#+end_src
+
+* Oppgave 4
+** Variable
+Her setter jeg opp fire ansatte og om dem er ledige eller opptatte 
+#+begin_src python
+class Helpdesk:
+     Ansatt1 = "Opptatt"
+     Ansatt2 = "Ledig"
+     Ansatt3 = "Ledig"  
+     Ansatt4 = "Opptatt" 
+#+end_src
+
+** Sjekker ledig/opptatt
+Her sjekker programmet om ansatte eller ledig eller ikke.
+#+begin_src python
+     def Ansat1():
+          if Helpdesk.Ansatt1 == "Ledig":
+               return -1
+
+          if Helpdesk.Ansatt1 == "Opptatt":
+               return 1
+
+     def Ansat2():
+          if Helpdesk.Ansatt2 == "Ledig":
+               return -1
+          if Helpdesk.Ansatt2 == "Opptatt":
+               return 3
+     def Ansat3():
+          if Helpdesk.Ansatt3 == "Ledig":
+               return -1
+          if Helpdesk.Ansatt3 == "Opptatt":
+               return 1
+     def Ansat4():
+          if Helpdesk.Ansatt4 == "Ledig":
+               return -1
+          if Helpdesk.Ansatt4 == "Opptatt":
+               return 2
+#+end_src
+
+** Ring til
+Her sjekker programmet om ansatte er ledig. Hvis brukeren ringer til en av ansatte og den ansatte er opptatt vil programmet sette brukeren over til en som er ledig.
+#+begin_src python
+     def RingTil():
+          BrRT = 3
+          if BrRT == 0:
+               if Helpdesk.Ansatt1 == "Opptatt":
+                    return Helpdesk.Ansat2()
+               elif Helpdesk.Ansatt1 == "Ledig":
+                    return Helpdesk.Ansat1()
+
+          if BrRT == 1:
+               if Helpdesk.Ansatt2 == "Ledig":
+                    return Helpdesk.Ansat2()
+               elif Helpdesk.Ansatt2 == "Opptatt":
+                    return Helpdesk.Ansat3()
+
+          if BrRT == 2:
+               if Helpdesk.Ansatt3 == "Ledig":
+                    return Helpdesk.Ansat3()
+               elif Helpdesk.Ansatt3 == "Opptatt":
+                    return Helpdesk.Ansat2()
+
+          if BrRT == 3:
+               if Helpdesk.Ansatt4 == "Ledig":
+                    return Helpdesk.Ansat4()
+               if Helpdesk.Ansatt4 == "Opptatt":
+                    return Helpdesk.Ansat2()
+          else:
+               return "Ikke Gyldig"
+               exit()
+#+end_src
+
+** Evig løkke
+*** Første del av funksjonen
+Her ser programmet om det finnes en evig løkke eller ikke. Programmet skal returnere false fordi løkke er funnet og true hvis løkke ikke er funnet.
+Her i første del skal programmet finne ikke en evig løkke.
+#+begin_src python
+     def gyldig(liste):
+         BrRT = 0
+         perkere, snudd = [],[]
+         for verdi in liste:
+             if verdi == -1:
+                 BrRT+=1
+                 continue
+             if verdi != -1:
+                 perkere.append([BrRT,verdi])
+                 BrRT+=1
+#+end_src
+*** Andre del av funksjonen <gyldig>
+Her skal programmet sjekke om løkka er funnet.
+#+begin_src python
+         BrRT=0
+         for verdi in perkere:
+            temp1,temp2 = verdi[-1],verdi[0]
+            snudd.append([temp1,temp2])
+            BrRT+=1
+         for perkere1 in perkere:
+            for snudd1 in snudd:
+                if perkere1 == snudd1:
+                    return False
+         return True
+#+end_src
+
+*** Alt kommer sammen og skriver ut på skjerm
+Her lager jeg er liste over ansatte og printer til skjerm
+#+begin_src python 
+list = [Helpdesk.Ansat1(), Helpdesk.Ansat2(), Helpdesk.Ansat3(), Helpdesk.Ansat4()]
+print(list)
+print(Helpdesk.RingTil())
+if __name__ == '__main__':
+    print(Helpdesk.gyldig([-1, -1, 0, 2]))
+#+end_src
